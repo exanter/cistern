@@ -4,8 +4,9 @@ go 1.12
 
 require (
 	github.com/gdamore/tcell v1.3.0
-	github.com/google/go-cmp v0.4.0
+	github.com/google/go-cmp v0.6.0
 	github.com/google/go-github/v29 v29.0.2
+	github.com/google/go-github/v59 v59.0.0 // indirect
 	github.com/lucasb-eyer/go-colorful v1.0.3 // indirect
 	github.com/mattn/go-runewidth v0.0.8
 	github.com/pelletier/go-toml v1.6.0

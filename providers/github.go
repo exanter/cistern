@@ -8,7 +8,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/google/go-github/v29/github"
+	"github.com/google/go-github/v59/github"
 	"github.com/nbedos/cistern/utils"
 	"golang.org/x/oauth2"
 )
@@ -65,7 +65,7 @@ func (c GitHubClient) Commit(ctx context.Context, repo string, ref string) (Comm
 	repo = url.PathEscape(repo)
 	ref = url.PathEscape(ref)
 
-	repoCommit, _, err := c.client.Repositories.GetCommit(ctx, owner, repo, ref)
+	repoCommit, _, err := c.client.Repositories.GetCommit(ctx, owner, repo, ref, nil)
 	if err != nil {
 		if e, ok := err.(*github.ErrorResponse); ok {
 			switch e.Response.StatusCode {
@@ -82,7 +82,7 @@ func (c GitHubClient) Commit(ctx context.Context, repo string, ref string) (Comm
 	commit := Commit{
 		Sha:     repoCommit.GetSHA(),
 		Author:  fmt.Sprintf("%s <%s>", githubCommit.GetAuthor().GetName(), githubCommit.GetAuthor().GetEmail()),
-		Date:    githubCommit.GetAuthor().GetDate(),
+		Date:    githubCommit.GetAuthor().GetDate().Time,
 		Message: githubCommit.GetMessage(),
 	}
 
